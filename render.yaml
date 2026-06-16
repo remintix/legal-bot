@@ -1,0 +1,12 @@
+services:
+  - type: worker
+    name: legal-bot
+    runtime: python
+    buildCommand: |
+      apt-get update && \
+      apt-get install -y tesseract-ocr tesseract-ocr-rus poppler-utils && \
+      pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: TESSDATA_PREFIX
+        value: /usr/share/tesseract-ocr/4.00/tessdata
